@@ -1,0 +1,8 @@
+__pycache__/
+reports/
+allure-results/
+allure-report/
+screenshots/
+videos/
+playwright-report/
+coverage/
