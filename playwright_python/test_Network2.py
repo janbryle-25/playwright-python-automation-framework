@@ -10,13 +10,13 @@ def interceptRequest(route):
     route.continue_(url="https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=6711e249ae2afd4c0b9f6fb0")
 
 def test_Network2(page: Page):
-    page.goto("https://rahulshettyacademy.com/client/")
     page.route("https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=*", interceptRequest)
+    page.goto("https://rahulshettyacademy.com/client/")
     page.locator("//input[@id='userEmail']").fill('nuzumaki@gmail.com')
     page.locator("//input[@id='userPassword']").fill('Naruto_123')
     page.locator("//input[@id='login']").click()
     page.locator("//button[contains(text(), 'ORDERS')]").click()
-    rowNeeded = page.locator(f"//tr[th[contains(text(), '69c4e6d8f86ba51a652ae524')]]")
+    rowNeeded = page.locator(f"//tr[th[contains(text(), '69d6362bf86ba51a655253ef')]]")
     rowNeeded.locator("xpath=.//td/button[contains(text(),'View')]").click()
     expected_message = page.locator("//*[@class='blink_me']").text_content()
     print(expected_message)

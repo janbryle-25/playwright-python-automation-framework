@@ -1,5 +1,6 @@
 import time
 
+import pytest
 from playwright.sync_api import Page, expect
 
 
@@ -21,6 +22,7 @@ def test_UIChecks(page: Page):
     expect (pageFrame.locator("body")).to_contain_text("Happy Subscibers!")
     time.sleep(5)
 
+@pytest.mark.smoke
 def test_tablePrice(page: Page):
     page.goto("https://rahulshettyacademy.com/seleniumPractise/#/offers")
     tableHeader = page.locator("th")

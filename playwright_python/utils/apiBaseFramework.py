@@ -7,10 +7,12 @@ loginPayload = {"userEmail": "nuzumaki@gmail.com", "userPassword": "Naruto_123"}
 
 class APIUtils:
 
-    def getToken(self, playwright: Playwright):
+    def getToken(self, playwright: Playwright, user_credentials):
+        userEmail = user_credentials['userEmail']
+        userPassword = user_credentials['userPassword']
         api_request_context = playwright.request.new_context(base_url='https://rahulshettyacademy.com')
         response = api_request_context.post("/api/ecom/auth/login"
-                                            ,data={"userEmail": loginPayload['userEmail'], "userPassword": loginPayload['userPassword']}
+                                            ,data={"userEmail": userEmail, "userPassword": userPassword}
                                             ,headers={"Content-Type": "application/json"}
                                             )
         assert response.ok
@@ -19,8 +21,8 @@ class APIUtils:
         token = responseBody['token']
         return token
 
-    def createOrder(self, playwright: Playwright):
-        token = self.getToken(playwright)
+    def createOrder(self, playwright: Playwright, user_credentials):
+        token = self.getToken(playwright, user_credentials)
         api_request_context = playwright.request.new_context(base_url="https://rahulshettyacademy.com")
         response = api_request_context.post("/api/ecom/order/create-order"
                                  , data= ordersPayload
